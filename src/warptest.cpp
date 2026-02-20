@@ -970,7 +970,7 @@ int main(int argc, char **argv) {
         // GUI mode
         nanogui::init();
         WarpTestScreen *screen = new WarpTestScreen();
-        nanogui::mainloop();
+        nanogui::run(nanogui::RunMode::VSync);
         delete screen;
         nanogui::shutdown();
         return 0;

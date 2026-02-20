@@ -115,8 +115,16 @@ set(ILMBASE_BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
 set(OPENEXR_BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
 set(ILMBASE_NAMESPACE_VERSIONING OFF CACHE BOOL " " FORCE)
 set(OPENEXR_NAMESPACE_VERSIONING OFF CACHE BOOL " " FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
+# OpenEXR master uses BUILD_TESTING/CTEST and optional PyIlmBase by default.
+# Disable both to keep dependency builds minimal.
+set(BUILD_TESTING OFF CACHE BOOL " " FORCE)
+set(PYILMBASE_ENABLE OFF CACHE BOOL " " FORCE)
+set(OPENEXR_BUILD_UTILS OFF CACHE BOOL " " FORCE)
+set(INSTALL_OPENEXR_EXAMPLES OFF CACHE BOOL " " FORCE)
+set(INSTALL_OPENEXR_DOCS OFF CACHE BOOL " " FORCE)
 add_subdirectory(openexr)
-set_property(TARGET IexMath eLut toFloat b44ExpLogTable dwaLookups IlmThread Half Iex Imath IlmImf PROPERTY FOLDER "dependencies")
+set_property(TARGET IexMath IlmThread Half Iex Imath IlmImf PROPERTY FOLDER "dependencies")
 
 # Build Thread Building Blocks (main shared libraries only)
 set(TBB_BUILD_SHARED          OFF  CACHE BOOL " " FORCE)
@@ -133,12 +141,21 @@ endif()
 
 # Build NanoGUI
 # Use OpenGL backend for UI. In the future, this can be removed to use Metal on MacOS
+# Default to X11 on Linux to avoid optional Wayland deps.
+if (UNIX AND NOT APPLE)
+  if (NOT DEFINED GLFW_BUILD_WAYLAND)
+    set(GLFW_BUILD_WAYLAND OFF CACHE BOOL "Build GLFW with Wayland support")
+  endif()
+  if (NOT DEFINED GLFW_BUILD_X11)
+    set(GLFW_BUILD_X11 ON CACHE BOOL "Build GLFW with X11 support")
+  endif()
+endif()
 set(NANOGUI_BACKEND "OpenGL" CACHE BOOL " " FORCE)
 set(NANOGUI_BUILD_EXAMPLES OFF CACHE BOOL " " FORCE)
 set(NANOGUI_BUILD_SHARED  OFF CACHE BOOL " " FORCE)
 set(NANOGUI_BUILD_PYTHON  OFF CACHE BOOL " " FORCE)
 add_subdirectory(nanogui)
-set_property(TARGET glfw glfw_objects nanogui PROPERTY FOLDER "dependencies")
+set_property(TARGET glfw nanogui PROPERTY FOLDER "dependencies")
 
 # Build the pugixml parser
 add_library(pugixml STATIC pugixml/src/pugixml.cpp)

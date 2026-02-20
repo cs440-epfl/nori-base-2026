@@ -132,7 +132,7 @@ static void render(Scene *scene, const std::string &filename) {
 
     /* Enter the application main loop */
     if (gui)
-        nanogui::mainloop(50.f);
+        nanogui::run(nanogui::RunMode::VSync);
 
     /* Shut down the user interface */
     render_thread.join();
@@ -231,7 +231,7 @@ int main(int argc, char **argv) {
             block.fromBitmap(bitmap);
             nanogui::init();
             NoriScreen *screen = new NoriScreen(block);
-            nanogui::mainloop(50.f);
+            nanogui::run(nanogui::RunMode::VSync);
             delete screen;
             nanogui::shutdown();
         } catch (const std::exception &e) {

@@ -22,7 +22,12 @@ jobs:
       run: cmake -E make_directory ${{github.workspace}}/build
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -yq libglu1-mesa-dev libxxf86vm-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libx11-dev
+      run: |
+        sudo apt-get update
+        sudo apt-get install -yq \
+          libglu1-mesa-dev libxxf86vm-dev libxrandr-dev libxinerama-dev \
+          libxcursor-dev libxi-dev libx11-dev libdbus-1-dev \
+          libwayland-dev libxkbcommon-dev wayland-protocols
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
