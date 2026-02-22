@@ -99,12 +99,8 @@ if (WIN32)
   set(ZLIB_BUILD_SHARED_LIBS OFF CACHE BOOL " " FORCE)
   add_subdirectory(zlib)
 
+  set(ZLIB_LIBRARY zlibstatic CACHE STRING "" FORCE)
   set(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/zlib" CACHE PATH " " FORCE)
-  if (CMAKE_GENERATOR STREQUAL "Ninja")
-    set(ZLIB_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/zlib/zlibstatic.lib" CACHE FILEPATH " " FORCE)
-  else()
-    set(ZLIB_LIBRARY "${CMAKE_CURRENT_BINARY_DIR}/zlib/$<CONFIGURATION>/zlibstatic.lib" CACHE FILEPATH " " FORCE)
-  endif()
 
   set_property(TARGET zlibstatic PROPERTY FOLDER "dependencies")
   include_directories(${ZLIB_INCLUDE_DIR} "${CMAKE_CURRENT_BINARY_DIR}/zlib")
