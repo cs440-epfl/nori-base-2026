@@ -1,28 +1,56 @@
-**Homework 2**
+**Homework 3**
 
 Student name:
 
 Sciper number:
 
-Octree construction (30 pts)
-============================
+Monte Carlo Sampling (60 pts)
+=============================
 
-Ray traversal (15 pts)
-======================
+For each of these sections, don't forget to include necessary derivations as well as screenshots of passing $\chi^2$ tests from the <tt>warptest</tt> executable.
 
-Improved ray traversal (15 pts)
-===============================
+Tent
+----
 
-Efficiency (40 pts)
-===============================
+Uniform disk
+------------
 
-Surface normal visualization of the Ajax bust:
+Uniform sphere
+--------------
+
+Uniform hemisphere
+------------------
+
+Cosine hemisphere
+-----------------
+
+Beckmann distribution
+---------------------
+
+Two simple rendering algorithms (40 pts)
+========================================
+
+Point lights
+------------
+
+Ajax bust illuminated by a point light source:
 <div class="twentytwenty-container">
-    <img src="ajax-normals-ref.png" alt="Reference">
-    <img src="ajax-normals.png" alt="Mine">
+    <img src="ajax-simple-ref.png" alt="Reference">
+    <img src="ajax-simple.png" alt="Mine">
 </div>
 
-Note: Nori automatically generates both an `.exr` as well as an sRGB tonemapped `.png` image of your rendering that is directly used for the comparison above. Please still commit both versions in your `results/homework-X` folder.
+Note: Nori automatically generates both a `.exr` as well as an sRGB tonemapped `.png` image of your rendering that should directly used for the comparison above. Please still commit both versions in your `results/homework-X` folder.
+
+Ambient occlusion
+-----------------
+
+Ajax bust rendered using ambient occlusion:
+<div class="twentytwenty-container">
+    <img src="ajax-ao-ref.png" alt="Reference">
+    <img src="ajax-ao.png" alt="Mine">
+</div>
+
+Note: Nori automatically generates both a `.exr` as well as an sRGB tonemapped `.png` image of your rendering that should directly used for the comparison above. Please still commit both versions in your `results/homework-X` folder.
 
 Feedback
 ========
